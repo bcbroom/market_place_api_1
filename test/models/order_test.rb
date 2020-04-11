@@ -28,4 +28,9 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
+  test 'a valid order has enough product available' do
+    @order.placements << Placement.new(product_id: @product1.id, quantity: (1 + @product1.quantity))
+    assert_not @order.valid?
+  end
+
 end
